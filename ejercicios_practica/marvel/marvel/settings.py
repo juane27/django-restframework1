@@ -42,10 +42,16 @@ BASE_APPS = [
 
 # Acá van las apps de 3ros que necesitamos agregar
 # para que Django las encuentre.
-THIRD_APPS = []
+THIRD_APPS = [
+    'rest_framework',
+    'rest_framework.authtoken',
+    
+]
 
 # Acá van las apps que creamos nosotros.
 LOCAL_APPS = ['e_commerce']
+
+
 
 INSTALLED_APPS = BASE_APPS + THIRD_APPS + LOCAL_APPS
 
@@ -62,6 +68,18 @@ INSTALLED_APPS = BASE_APPS + THIRD_APPS + LOCAL_APPS
 #     # Third party apps: acá vamos agregando las aplicaciones de terceros,
 #     # extensiones de Django.
 # ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -167,3 +185,17 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',  # Configura a 'DEBUG' para imprimir todos los mensajes.
+    },
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Cómic</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .comic-card {
+            color: black;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 3em;
+        }
+
+        /* Estilos adicionales personalizados si es necesario */
+    </style>
+</head>
+
+
+
+
+
+
+<body>
+    <div class="container">
+        {% if filtro_comic == 1 %}
+        <h1 style="text-align: center;margin:2em">Lista de comics de Marvel con precio mayor o igual a $5.00</h1>
+    {% elif filtro_comic == 0 %}
+        <h1 style="text-align: center;margin:2em">No se encontraron comics de Marvel con precio mayor o igual a $5.00</h1>
+    {% elif filtro_comic == 2 %}
+    <h1 style="text-align: center;margin:2em">Lista de comics de Marvel con stock mayor a 10 unidades</h1>
+    {% elif filtro_comic == 3 %}
+    <h1 style="text-align: center;margin:2em">No se encontraron comics de Marvel con stock mayor a 10 unidades</h1>
+    
+    {% else %}
+        <h1 style="text-align: center;margin:2em">Lista de comics de Marvel</h1>
+    {% endif %}
+
+        {% for comic in comic_data %}
+        <div class="comic-card">
+            <h1>Detalles del Cómic: {{ comic.title }}</h1>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <!-- Mostrar la imagen como una foto -->
+                        <img src="{{ comic.picture }}" alt="{{ comic.title }}" class="img-fluid">
+                    </div>
+                    <div class="col-md-3">
+                        <p><strong>Marvel ID:</strong> {{ comic.marvel_id }}</p>
+                        <p><strong>Título:</strong> {{ comic.title }}</p>
+                        <p><strong>Descripción:</strong> {{ comic.description }}</p>
+                        <p><strong>Precio:</strong> ${{ comic.price }}</p>
+                        <p><strong>Unidades disponibles:</strong> {{ comic.stock_qty }}</p>
+                        <!-- Agrega más párrafos según los campos de tu modelo Comic -->
+                    </div>
+                </div>
+
+           
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Agregar los scripts de Bootstrap al final del cuerpo del documento para un rendimiento óptimo -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
